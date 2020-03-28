@@ -26,4 +26,12 @@ public class Disk {
         position.setX(x);
         position.setY(y);
     }
+
+    public char getSign(){
+        return sign;
+    }
+
+    public Point getPosition(){
+        return position;
+    }
 }
