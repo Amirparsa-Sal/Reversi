@@ -108,14 +108,15 @@ public class Game {
 
     public static void main(String[] args) {
         Game game = new Game("Single Player");
-//        game.getBoard().print();
-        game.getBot().think(null);
-        /*game.showScores();
+        game.getBoard().print();
+//        game.getBot().think(null);
+        game.showScores();
         while (game.inProgress()) {
             if (game.getTurn() % 2 == 0)
                 game.playTurn(1);
             else
                 game.playTurn(2);
-        }*/
+        }
     }
+    //WINNER
 }

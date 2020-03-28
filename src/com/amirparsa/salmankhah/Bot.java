@@ -9,17 +9,23 @@ class Bot extends Player {
     }
 
     public Point think(ArrayList<Point> points) {
-        ArrayList<ArrayList<Integer>> simulatingList = new ArrayList<>();
         //Adding inner lists
-        Board simulatingBoard = new Board(null,null);
-        simulatingBoard.copy(getBoard());
-//        for (int i = 0; i < points.size(); i++){
-//            simulatingList.add(new ArrayList<Integer>());
-//        }
-
-
-
-        return null;
+        int bestMove = 0, bestProfit = -100;
+        for (int i = 0; i < points.size(); i++) {
+            Board simulatingBoard = new Board(null, null);
+            simulatingBoard.copy(getBoard());
+            Player simulatedBot = simulatingBoard.getPlayers()[1];
+            simulatedBot.setBoard(simulatingBoard);
+            simulatedBot.placeDisk(points.get(i));
+            Integer profit = calculateProfit(simulatingBoard);
+            if (profit > bestProfit) {
+                bestMove = i;
+                bestProfit=profit;
+            }
+        }
+        System.out.print("Bot has chosen: ");
+        points.get(bestMove).print();
+        return points.get(bestMove);
     }
 
     private int calculateProfit(Board simulatingBoard) {
@@ -40,9 +46,9 @@ class Bot extends Player {
                 if (sign != this.getSign() && sign != '\0')
                     playerProfit += balance[i][j];
                 else if (sign == this.getSign())
-                    botProfit+=balance[i][j];
+                    botProfit += balance[i][j];
             }
         }
-        return botProfit-playerProfit;
+        return botProfit - playerProfit;
     }
 }
