@@ -55,4 +55,9 @@ public class Point {
         int y = secondPoint.getY() * 2 - this.y;
         return new Point(x, y);
     }
+
+    public boolean equals(Point otherPoint){
+        return x==otherPoint.getX() && y==otherPoint.getY();
+    }
 }
+

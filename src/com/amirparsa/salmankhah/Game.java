@@ -38,6 +38,10 @@ public class Game {
         return board;
     }
 
+    public int getTurn(){
+        return turn;
+    }
+
     public void playTurn(int playerNumber){
         Scanner sc = new Scanner(System.in);
         Player player = players[playerNumber-1];
@@ -45,6 +49,7 @@ public class Game {
         System.out.println("It's " + name + "'s " + "turn");
         System.out.print(name + "'s ");
         ArrayList<Point> points = player.availableMoves();
+        turn++;
         if(points.size()==0){
             System.out.println("Pass");
             return;
@@ -53,14 +58,20 @@ public class Game {
         System.out.println("Enter your move:");
         //must check here
         String move = sc.nextLine();
-        int x = move.charAt(2) - 'A';
-        int y = move.charAt(0) - '1';
-        player.placeDisk(new Point(x,y));
+        Point point = new Point(move.charAt(2) - 'A',move.charAt(0) - '1');
+        player.placeDisk(point);
+        board.updateMap(point);
         board.print();
+
     }
     public static void main(String[] args) {
         Game game = new Game();
         game.getBoard().print();
-        game.playTurn(1);
+        while (true) {
+            if (game.getTurn() % 2 == 0)
+                game.playTurn(1);
+            else
+                game.playTurn(2);
+        }
     }
 }

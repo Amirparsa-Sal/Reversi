@@ -53,5 +53,30 @@ public class Board {
     }
 
 
-    //public void updateMap(){}
+    public void updateMap(Point lastMove) {
+        char sign = getDisk(lastMove.getX(), lastMove.getY()).getSign();
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                Point tmp = new Point(lastMove.getX() + i, lastMove.getY() + j);
+                boolean flag = false;
+                while (!flag && tmp.isValid()) {
+                    char tmpSign = getDisk(tmp.getX(), tmp.getY()).getSign();
+                    if (tmpSign == sign) {
+                        flag = true;
+                        break;
+                    } else if (tmpSign == '\0')
+                        break;
+                    tmp.setX(tmp.getX() + i);
+                    tmp.setY(tmp.getY() + j);
+                }
+                if (flag) {
+                    while (!tmp.equals(lastMove)) {
+                        tmp.setX(tmp.getX() - i);
+                        tmp.setY(tmp.getY() - j);
+                        getDisk(tmp.getX(), tmp.getY()).setSign(sign);
+                    }
+                }
+            }
+        }
+    }
 }
