@@ -8,9 +8,9 @@ package com.amirparsa.salmankhah;
  */
 public class Point {
     //X of point
-    int x;
+    private int x;
     //Y of point
-    int y;
+    private int y;
 
     public Point() {
         this(0, 0);
@@ -43,7 +43,7 @@ public class Point {
     }
 
     public void print() {
-        System.out.println("(" + x + ", " + y + ")");
+        System.out.println("(" + (y+1) + ", " + (char)(x + 'A') + ")");
     }
 
     public boolean isNeighbor(Point secondPoint) {
