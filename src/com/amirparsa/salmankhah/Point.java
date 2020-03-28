@@ -30,17 +30,29 @@ public class Point {
         this.y = y;
     }
 
-    public int getX(){
+    public int getX() {
         return x;
     }
 
-    public int getY(){
+    public int getY() {
         return y;
     }
 
-    public boolean isValid(){
-        if(x>=0 && x<8 && y>=0 && y<8)
-            return true;
-        return false;
+    public boolean isValid() {
+        return x >= 0 && x < 8 && y >= 0 && y < 8;
+    }
+
+    public void print() {
+        System.out.println("(" + x + ", " + y + ")");
+    }
+
+    public boolean isNeighbor(Point secondPoint) {
+        return Math.abs(x - secondPoint.getX()) < 2 && Math.abs(y - secondPoint.getY()) < 2;
+    }
+
+    public Point reflection(Point secondPoint) {
+        int x = secondPoint.getX() * 2 - this.x;
+        int y = secondPoint.getY() * 2 - this.y;
+        return new Point(x, y);
     }
 }
