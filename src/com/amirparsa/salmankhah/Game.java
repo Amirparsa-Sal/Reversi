@@ -50,7 +50,10 @@ public class Game {
             for (int j = 0; j < 8; j++)
                 if (board.getDisk(i, j).getSign() == '\0')
                     flag = true;
-        return flag;
+        int cnt1 = countPlayerDisks(1);
+        int cnt2 = countPlayerDisks(2);
+
+        return flag && cnt1*cnt2!=0;
     }
 
     public void playTurn(int playerNumber) {
@@ -66,15 +69,7 @@ public class Game {
         }
         System.out.print(name + "'s ");
         player.showAvailableMoves();
-        Point point;
-        while (true) {
-            System.out.println("Enter your move:");
-            String move = sc.nextLine();
-            point = new Point(move.charAt(2) - 'A', move.charAt(0) - '1');
-            if (player.count(points, point)>0)
-                break;
-            System.out.println("Invalid move. Try again :)");
-        }
+        Point point = player.think(points);
         player.placeDisk(point);
         board.updateMap(point);
         board.print();

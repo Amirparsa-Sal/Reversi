@@ -3,6 +3,7 @@ package com.amirparsa.salmankhah;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Scanner;
 
 class Player {
     private String name;
@@ -108,11 +109,25 @@ class Player {
         }
     }
 
-    public int count(ArrayList<Point> points, Point pnt) {
+    private int count(ArrayList<Point> points, Point pnt) {
         int cnt = 0;
         for (Point point : points)
             if (point.equals(pnt))
                 cnt++;
         return cnt;
+    }
+
+    public Point think (ArrayList<Point> points){
+        Point point;
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("Enter your move:");
+            String move = sc.nextLine();
+            point = new Point(move.charAt(2) - 'A', move.charAt(0) - '1');
+            if (count(points, point)>0)
+                break;
+            System.out.println("Invalid move. Try again :)");
+        }
+        return point;
     }
 }
