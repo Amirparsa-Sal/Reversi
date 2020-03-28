@@ -1,8 +1,66 @@
 package com.amirparsa.salmankhah;
 
-public class Game {
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Game {
+    private Board board;
+    private Player[] players;
+    private int turn;
+
+    public Game(){
+        players = new Player[2];
+        setPlayer(1);
+        setPlayer(2);
+        setBoard();
+        turn = 0;
+    }
+
+    public void setPlayer(int playerNumber){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter player" +(char)('0'+playerNumber) +"'s name:");
+        String playerName = sc.next();
+        System.out.println("Enter player" +(char)('0'+playerNumber) +"'s sign:");
+        char playerSign = sc.next().charAt(0);
+        players[playerNumber-1] = new Player(playerName,playerSign);
+    }
+
+    public Player getPlayer(int playerNumber){
+        return players[playerNumber-1];
+    }
+    public void setBoard(){
+        board = new Board(players[0],players[1]);
+    }
+
+    public Board getBoard(){
+        return board;
+    }
+
+    public void playTurn(int playerNumber){
+        Scanner sc = new Scanner(System.in);
+        Player player = players[playerNumber-1];
+        String name = player.getName();
+        System.out.println("It's " + name + "'s " + "turn");
+        System.out.print(name + "'s ");
+        ArrayList<Point> points = player.availableMoves();
+        if(points.size()==0){
+            System.out.println("Pass");
+            return;
+        }
+        player.showAvailableMoves();
+        System.out.println("Enter your move:");
+        //must check here
+        String move = sc.nextLine();
+        int x = move.charAt(2) - 'A';
+        int y = move.charAt(0) - '1';
+        player.placeDisk(new Point(x,y));
+        board.print();
+    }
     public static void main(String[] args) {
-	// write your code here
+        Game game = new Game();
+        game.getBoard().print();
+        game.playTurn(1);
     }
 }
