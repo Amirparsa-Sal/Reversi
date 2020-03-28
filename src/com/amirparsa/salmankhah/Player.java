@@ -108,7 +108,7 @@ class Player {
         }
     }
 
-    private int count(ArrayList<Point> points, Point pnt) {
+    public int count(ArrayList<Point> points, Point pnt) {
         int cnt = 0;
         for (Point point : points)
             if (point.equals(pnt))
