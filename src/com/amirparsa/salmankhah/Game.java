@@ -2,8 +2,7 @@ package com.amirparsa.salmankhah;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Game {
     private Board board;

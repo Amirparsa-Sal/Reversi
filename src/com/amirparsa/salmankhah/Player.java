@@ -1,6 +1,8 @@
 package com.amirparsa.salmankhah;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
 class Player {
     private String name;
@@ -28,26 +30,39 @@ class Player {
     public void setName(String name) {
         this.name = name;
     }
-    public void placeDisk(Point position){
-        board.getDisk(position.getX(),position.getY()).setSign(sign);
+
+    public void placeDisk(Point position) {
+        board.getDisk(position.getX(), position.getY()).setSign(sign);
     }
 
-    public void setBoard(Board board){
+    public void setBoard(Board board) {
         this.board = board;
     }
+
     public ArrayList<Point> availableMoves() {
         ArrayList<Disk> playerDisks = getDisks();
         ArrayList<Disk> opponentDisks = getOpponentDisks();
         ArrayList<Point> availableDisks = new ArrayList<>();
+
         for (Disk playerDisk : playerDisks) {
             for (Disk opponentDisk : opponentDisks) {
-                Point playerPosition = playerDisk.getPosition();
-                Point opponentPosition = opponentDisk.getPosition();
-                if (playerPosition.isNeighbor(opponentPosition)) {
+                Point playerPosition = new Point();
+                playerPosition.copy(playerDisk.getPosition());
+                Point opponentPosition = new Point();
+                opponentPosition.copy(opponentDisk.getPosition());
+                while (playerPosition.isNeighbor(opponentPosition )) {
                     Point reflectPoint = playerPosition.reflection(opponentPosition);
+                    if (!reflectPoint.isValid())
+                        break;
                     Disk reflectDisk = board.getDisk(reflectPoint.getX(), reflectPoint.getY());
-                    if (reflectPoint.isValid() && reflectDisk.getSign() == '\0')
+                    if (reflectDisk.getSign() == sign)
+                        break;
+                    else if (reflectDisk.getSign() == '\0') {
                         availableDisks.add(reflectPoint);
+                        break;
+                    }
+                    playerPosition.copy(opponentPosition);
+                    opponentPosition.copy(reflectPoint);
                 }
             }
         }
@@ -75,11 +90,29 @@ class Player {
     public void showAvailableMoves() {
         int index = 1;
         ArrayList<Point> points = availableMoves();
+        removeDuplicate(points);
         System.out.println("available moves:");
         for (Point point : points) {
             System.out.print(index + ") ");
             point.print();
             index++;
         }
+    }
+
+    private void removeDuplicate(ArrayList<Point> points) {
+        Iterator<Point> it = points.iterator();
+        while (it.hasNext()) {
+            Point pnt = it.next();
+            if (count(points, pnt) > 1)
+                it.remove();
+        }
+    }
+
+    private int count(ArrayList<Point> points, Point pnt) {
+        int cnt = 0;
+        for (Point point : points)
+            if (point.equals(pnt))
+                cnt++;
+        return cnt;
     }
 }

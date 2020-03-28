@@ -50,14 +50,19 @@ public class Point {
         return Math.abs(x - secondPoint.getX()) < 2 && Math.abs(y - secondPoint.getY()) < 2;
     }
 
-    public Point reflection(Point secondPoint) {
-        int x = secondPoint.getX() * 2 - this.x;
-        int y = secondPoint.getY() * 2 - this.y;
+    public Point reflection(Point otherPoint) {
+        int x = otherPoint.getX() * 2 - this.x;
+        int y = otherPoint.getY() * 2 - this.y;
         return new Point(x, y);
     }
 
+    public void copy(Point otherPoint){
+        x = otherPoint.getX();
+        y = otherPoint.getY();
+    }
     public boolean equals(Point otherPoint){
         return x==otherPoint.getX() && y==otherPoint.getY();
     }
+
 }
 
