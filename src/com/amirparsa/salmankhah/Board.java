@@ -5,18 +5,18 @@ package com.amirparsa.salmankhah;
  */
 public class Board {
     //Disks
-    Disk[][] table;
+    private Disk[][] table;
     //Player1
-    Player player1;
+    private Player player1;
     //Player2
-    Player player2;
+    private Player player2;
 
     public Board(Player player1, Player player2) {
         table = new Disk[8][8];
         this.player1 = player1;
         this.player2 = player2;
-        player1.board = this;
-        player2.board = this;
+        player1.setBoard(this);
+        player2.setBoard(this);
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++)
                 table[i][j] = new Disk('\0', j, i);
@@ -31,11 +31,16 @@ public class Board {
     }
 
     public void setDiskSign(char sign, int x, int y) {
-        this.getDisk(x,y).setSign(sign);
+        this.getDisk(x, y).setSign(sign);
     }
 
     public void print() {
+        System.out.print("  ");
+        for (int i = 0; i < 8; i++)
+            System.out.print(" " + (char) ('A' + i) + " ");
+        System.out.println();
         for (int i = 0; i < 8; i++) {
+            System.out.print(i + 1 + " ");
             for (int j = 0; j < 8; j++) {
                 char sign = this.getDisk(j, i).getSign();
                 if (sign == '\0')
@@ -46,4 +51,7 @@ public class Board {
             System.out.println();
         }
     }
+
+
+    //public void updateMap(){}
 }

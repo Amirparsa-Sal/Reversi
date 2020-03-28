@@ -5,9 +5,9 @@ package com.amirparsa.salmankhah;
  */
 public class Disk {
     //Sign of the disk
-    char sign;
+    private char sign;
     //Position of the disk
-    Point position;
+    private Point position;
 
     public Disk(){
         this('\0',0,0);
