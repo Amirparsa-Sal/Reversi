@@ -30,11 +30,15 @@ public class Board {
         return table[y][x];
     }
 
+    public void setDiskSign(char sign, int x, int y) {
+        this.getDisk(x,y).setSign(sign);
+    }
+
     public void print() {
         for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++){
-                char sign = this.getDisk(j,i).getSign();
-                if(sign=='\0')
+            for (int j = 0; j < 8; j++) {
+                char sign = this.getDisk(j, i).getSign();
+                if (sign == '\0')
                     System.out.print(" . ");
                 else
                     System.out.print(" " + sign + " ");
