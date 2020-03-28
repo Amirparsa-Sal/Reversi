@@ -34,4 +34,9 @@ public class Disk {
     public Point getPosition(){
         return position;
     }
+
+    public void copy(Disk otherDisk){
+        this.setSign(otherDisk.getSign());
+        this.getPosition().copy(otherDisk.getPosition());
+    }
 }

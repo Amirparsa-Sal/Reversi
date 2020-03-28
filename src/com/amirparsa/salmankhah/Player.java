@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
 
-class Player {
+abstract class Player {
     private String name;
     private char sign;
     private Board board;
@@ -40,6 +40,9 @@ class Player {
         this.board = board;
     }
 
+    public Board getBoard(){
+        return board;
+    }
     public ArrayList<Point> availableMoves() {
         ArrayList<Disk> playerDisks = getDisks();
         ArrayList<Disk> opponentDisks = getOpponentDisks();
@@ -51,7 +54,7 @@ class Player {
                 playerPosition.copy(playerDisk.getPosition());
                 Point opponentPosition = new Point();
                 opponentPosition.copy(opponentDisk.getPosition());
-                while (playerPosition.isNeighbor(opponentPosition )) {
+                while (playerPosition.isNeighbor(opponentPosition)) {
                     Point reflectPoint = playerPosition.reflection(opponentPosition);
                     if (!reflectPoint.isValid())
                         break;
@@ -68,25 +71,25 @@ class Player {
             }
         }
         return availableDisks;
-    }
+    } //BOT
 
-    private ArrayList<Disk> getDisks() {
+    protected ArrayList<Disk> getDisks() {
         ArrayList<Disk> disks = new ArrayList<>();
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++)
                 if (board.getDisk(j, i).getSign() == this.getSign())
                     disks.add(board.getDisk(j, i));
         return disks;
-    }
+    } //BOT
 
-    private ArrayList<Disk> getOpponentDisks() {
+    protected ArrayList<Disk> getOpponentDisks() {
         ArrayList<Disk> disks = new ArrayList<>();
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++)
                 if (board.getDisk(j, i).getSign() != this.getSign() && board.getDisk(j, i).getSign() != '\0')
                     disks.add(board.getDisk(j, i));
         return disks;
-    }
+    } //BOT
 
     public void showAvailableMoves() {
         int index = 1;
@@ -100,7 +103,7 @@ class Player {
         }
     }
 
-    private void removeDuplicate(ArrayList<Point> points) {
+    protected void removeDuplicate(ArrayList<Point> points) {
         Iterator<Point> it = points.iterator();
         while (it.hasNext()) {
             Point pnt = it.next();
@@ -109,7 +112,7 @@ class Player {
         }
     }
 
-    private int count(ArrayList<Point> points, Point pnt) {
+    protected int count(ArrayList<Point> points, Point pnt) {
         int cnt = 0;
         for (Point point : points)
             if (point.equals(pnt))
@@ -117,17 +120,12 @@ class Player {
         return cnt;
     }
 
-    public Point think (ArrayList<Point> points){
-        Point point;
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.println("Enter your move:");
-            String move = sc.nextLine();
-            point = new Point(move.charAt(2) - 'A', move.charAt(0) - '1');
-            if (count(points, point)>0)
-                break;
-            System.out.println("Invalid move. Try again :)");
-        }
-        return point;
+    public void copy(Player otherPlayer){
+        this.setName(otherPlayer.getName());
+        this.setSign(otherPlayer.getSign());
     }
+
+    public abstract Point think(ArrayList<Point> points);
+
+
 }

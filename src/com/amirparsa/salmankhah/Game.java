@@ -10,22 +10,36 @@ public class Game {
     private int turn;
     private int end;
 
-    public Game() {
+    public Game(String mode) {
         players = new Player[2];
-        setPlayer(1);
-        setPlayer(2);
+        setRealPlayer(1);
+        if(mode.equals("Multi Player"))
+            setRealPlayer(2);
+        else
+            setBot();
         setBoard();
         turn = 0;
         end = 0;
     }
 
-    public void setPlayer(int playerNumber) {
+    public void setRealPlayer(int playerNumber) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter player" + (char) ('0' + playerNumber) + "'s name:");
         String playerName = sc.next();
         System.out.println("Enter player" + (char) ('0' + playerNumber) + "'s sign:");
         char playerSign = sc.next().charAt(0);
-        players[playerNumber - 1] = new Player(playerName, playerSign);
+        players[playerNumber - 1] = new RealPlayer(playerName, playerSign);
+    }
+
+    public void setBot(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter player bot's sign:");
+        char botSign = sc.next().charAt(0);
+        players[1] = new Bot("Bot", botSign);
+    }
+
+    public Bot getBot(){
+        return (Bot)players[1];
     }
 
     public Player getPlayer(int playerNumber) {
@@ -68,7 +82,7 @@ public class Game {
             return;
         }
         System.out.print(name + "'s ");
-        player.showAvailableMoves();
+        players[playerNumber - 1].showAvailableMoves();
         Point point = player.think(points);
         player.placeDisk(point);
         board.updateMap(point);
@@ -93,14 +107,15 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        Game game = new Game();
-        game.getBoard().print();
-        game.showScores();
+        Game game = new Game("Single Player");
+//        game.getBoard().print();
+        game.getBot().think(null);
+        /*game.showScores();
         while (game.inProgress()) {
             if (game.getTurn() % 2 == 0)
                 game.playTurn(1);
             else
                 game.playTurn(2);
-        }
+        }*/
     }
 }
