@@ -4,6 +4,7 @@ import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import java.sql.SQLOutput;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Game {
     private Board board;
@@ -29,15 +30,18 @@ public class Game {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter player" + (char) ('0' + playerNumber) + "'s name:");
         String playerName = sc.next();
-        System.out.println("Enter player" + (char) ('0' + playerNumber) + "'s sign:");
-        char playerSign = sc.next().charAt(0);
+        char playerSign = (char) ('0' + playerNumber);
+        System.out.println("Your sign is: " + playerSign);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         players[playerNumber - 1] = new RealPlayer(playerName, playerSign);
     }
 
     public void setBot(int playerNumber) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter bot's sign:");
-        char botSign = sc.next().charAt(0);
+        char botSign = (char) ('0' + playerNumber);
         String name;
         if (playerNumber == 1)
             name = "Amir(Bot)";
@@ -71,7 +75,7 @@ public class Game {
         Scanner sc = new Scanner(System.in);
         Player player = players[playerNumber - 1];
         String name = player.getName();
-        System.out.println("It's " + name + "'s " + "turn");
+        System.out.println("\nIt's " + name + "'s " + "turn\n");
         ArrayList<Point> points = player.availableMoves();
         turn++;
         if (points.size() == 0) {
@@ -81,6 +85,12 @@ public class Game {
         System.out.print(name + "'s ");
         players[playerNumber - 1].showAvailableMoves();
         Point point = player.think(points);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         player.placeDisk(point);
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
         board.updateMap(point);
@@ -101,10 +111,13 @@ public class Game {
         int score1 = countPlayerDisks(1);
         int score2 = countPlayerDisks(2);
         System.out.print("Scores:    ");
-        System.out.println(players[0].getName() + ": " + score1 + "    " + players[1].getName() + ": " + score2);
+        String bgColor1 = "\u001b[41m", bgColor2 = "\u001b[44m", textColor = "\u001B[30m", reset = "\u001B[0m";
+        System.out.println(bgColor1 + textColor + players[0].getName() + ": " + score1 + reset + "    "
+                + bgColor2 + textColor + players[1].getName() + ": " + score2 + reset);
     }
 
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Select mode:");
         System.out.println("1) Single Player");
@@ -118,6 +131,8 @@ public class Game {
             game = new Game("Player", "Player");
         else
             game = new Game("Bot", "Bot");
+
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
         game.getBoard().print();
         game.showScores();
         while (game.inProgress()) {
@@ -133,8 +148,8 @@ public class Game {
         System.out.println("\nFinal Result:    " + name1 + ": " + score1 + "    " + name2 + ": " + score2);
         if (score1 > score2)
             System.out.println(name1 + " WON!");
-        else if(score1<score2)
-            System.out.println(name2+ " WON!");
+        else if (score1 < score2)
+            System.out.println(name2 + " WON!");
         else
             System.out.println("DRAW!");
     }

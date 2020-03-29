@@ -54,7 +54,7 @@ class Bot extends Player {
 //            botMoves.get(i).print();
 //            System.out.println("BestWorst: " + bestWorstInnerProfit + "    " + "InnerMin: " + innerMin);
         }
-        System.out.print(getName() + " has chosen: ");
+        System.out.print("\n" + getName() + " has chosen: ");
         botMoves.get(bestMove).print();
         return botMoves.get(bestMove);
     }
@@ -100,8 +100,8 @@ class Bot extends Player {
                     botProfit += balance[i][j];
             }
         }
-        botProfit += this.getDisks().size()*(5);
-        playerProfit += this.getOpponentDisks().size()*(5);
+        botProfit += this.getDisks().size()*(4);
+        playerProfit += this.getOpponentDisks().size()*(4);
         return botProfit - playerProfit;
     }
 }

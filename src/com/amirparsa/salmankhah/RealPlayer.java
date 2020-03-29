@@ -13,7 +13,7 @@ class RealPlayer extends Player{
         Point point;
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.println("Enter your move:");
+            System.out.println("\nEnter your move (Example: 3 F):");
             String move = sc.nextLine();
             point = new Point(move.charAt(2) - 'A', move.charAt(0) - '1');
             if (count(points, point)>0)

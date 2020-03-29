@@ -57,10 +57,16 @@ public class Board {
             System.out.print(i + 1 + " ");
             for (int j = 0; j < 8; j++) {
                 char sign = this.getDisk(j, i).getSign();
+                String bgColor,textColor="\u001B[30m";
+                String reset = "\u001B[0m";
+                if(player1.getSign()==sign)
+                    bgColor = "\u001b[41m";
+                else
+                    bgColor = "\u001b[44m";
                 if (sign == '\0')
                     System.out.print(" . ");
                 else
-                    System.out.print(" " + sign + " ");
+                    System.out.print(bgColor + textColor + " " + sign + " " + reset);
             }
             System.out.println();
         }
