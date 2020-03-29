@@ -1,11 +1,13 @@
 package com.amirparsa.salmankhah;
 
+import com.sun.deploy.security.SelectableSecurityManager;
+
 import java.util.ArrayList;
 
 class Bot extends Player {
 
     public Bot(String name, char sign) {
-        super("Bot", sign);
+        super(name, sign);
     }
 
     public Point think(ArrayList<Point> points) {
@@ -14,10 +16,19 @@ class Bot extends Player {
         for (int i = 0; i < points.size(); i++) {
             Board simulatingBoard = new Board(null, null);
             simulatingBoard.copy(getBoard());
-            Player simulatedBot = simulatingBoard.getPlayers()[1];
+            Player[] players = getBoard().getPlayers();
+            Player simulatedBot;
+            if(players[0].equals(this))
+                simulatedBot = simulatingBoard.getPlayers()[0];
+            else
+                simulatedBot = simulatingBoard.getPlayers()[1];
             simulatedBot.setBoard(simulatingBoard);
             simulatedBot.placeDisk(points.get(i));
+            simulatingBoard.updateMap(points.get(i));
+//            simulatingBoard.print();
             Integer profit = calculateProfit(simulatingBoard);
+//            points.get(i).print();
+//            System.out.println(profit);
             if (profit > bestProfit) {
                 bestMove = i;
                 bestProfit=profit;

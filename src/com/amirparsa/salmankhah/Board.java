@@ -95,15 +95,14 @@ public class Board {
 
     public void copy(Board otherBoard) {
         Player[] players = new Player[2];
-        players[0]=new RealPlayer(null,'\0');
-        players[0].copy(otherBoard.getPlayers()[0]);
-        if(otherBoard.getPlayers()[1] instanceof RealPlayer)
-            players[1] = new RealPlayer(null, '\0');
-        else
-            players[1] = new Bot(null, '\0');
-        players[1].copy(otherBoard.getPlayers()[1]);
+        for(int i=0;i<2;i++) {
+            if (otherBoard.getPlayers()[i] instanceof RealPlayer)
+                players[i] = new RealPlayer(null, '\0');
+            else
+                players[i] = new Bot(null, '\0');
+            players[i].copy(otherBoard.getPlayers()[i]);
+        }
         this.setPlayers(players);
-
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 Disk disk = otherBoard.getDisk(j,i);

@@ -125,6 +125,9 @@ abstract class Player {
         this.setSign(otherPlayer.getSign());
     }
 
+    public boolean equals(Player otherPlayer){
+        return name.equals(otherPlayer.getName()) && sign==otherPlayer.getSign();
+    }
     public abstract Point think(ArrayList<Point> points);
 
 

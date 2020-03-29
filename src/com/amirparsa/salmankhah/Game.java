@@ -8,18 +8,19 @@ public class Game {
     private Board board;
     private Player[] players;
     private int turn;
-    private int end;
-
-    public Game(String mode) {
+    public Game(String player1Type, String player2Type) {
         players = new Player[2];
-        setRealPlayer(1);
-        if(mode.equals("Multi Player"))
-            setRealPlayer(2);
+        if(player1Type.equals("Bot"))
+            setBot(1);
         else
-            setBot();
+           setRealPlayer(1);
+
+        if(player2Type.equals("Bot"))
+            setBot(2);
+        else
+            setRealPlayer(2);
         setBoard();
         turn = 0;
-        end = 0;
     }
 
     public void setRealPlayer(int playerNumber) {
@@ -31,15 +32,17 @@ public class Game {
         players[playerNumber - 1] = new RealPlayer(playerName, playerSign);
     }
 
-    public void setBot(){
+    public void setBot(int playerNumber){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter player bot's sign:");
+        System.out.println("Enter bot's sign:");
         char botSign = sc.next().charAt(0);
-        players[1] = new Bot("Bot", botSign);
-    }
+        String name;
+        if(playerNumber==1)
+            name="Amir(Bot)";
+        else
+            name="Parsa(Bot)";
+        players[playerNumber-1] = new Bot(name, botSign);
 
-    public Bot getBot(){
-        return (Bot)players[1];
     }
 
     public Player getPlayer(int playerNumber) {
@@ -107,9 +110,8 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        Game game = new Game("Single Player");
+        Game game = new Game("Bot","Bot");
         game.getBoard().print();
-//        game.getBot().think(null);
         game.showScores();
         while (game.inProgress()) {
             if (game.getTurn() % 2 == 0)
