@@ -62,15 +62,7 @@ public class Game {
     }
 
     public boolean inProgress() {
-        boolean flag=false;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if (board.getDisk(i, j).getSign() == '\0')
-                    flag = true;
-        int cnt1 = countPlayerDisks(1);
-        int cnt2 = countPlayerDisks(2);
-
-        return flag && cnt1*cnt2!=0;
+        return !(players[0].availableMoves().size()==0 && players[1].availableMoves().size()==0);
     }
 
     public void playTurn(int playerNumber) {
@@ -110,7 +102,7 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        Game game = new Game("Bot","Bot");
+        Game game = new Game("Bot","Player");
         game.getBoard().print();
         game.showScores();
         while (game.inProgress()) {
