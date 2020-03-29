@@ -51,10 +51,10 @@ class Bot extends Player {
                 bestWorstInnerProfit = innerMin;
                 bestMove = i;
             }
-            botMoves.get(i).print();
-            System.out.println("BestWorst: " + bestWorstInnerProfit + "    " + "InnerMin: " + innerMin);
+//            botMoves.get(i).print();
+//            System.out.println("BestWorst: " + bestWorstInnerProfit + "    " + "InnerMin: " + innerMin);
         }
-        System.out.print("Bot has chosen: ");
+        System.out.print(getName() + " has chosen: ");
         botMoves.get(bestMove).print();
         return botMoves.get(bestMove);
     }
@@ -71,23 +71,23 @@ class Bot extends Player {
                 {99, -8, 8, 6, 6, 8, -8, 99}
         };
         if(simulatingBoard.getDisk(0, 0).getSign()==getSign()){
-            balance[0][1]=0;
-            balance[1][1]=0;
+            balance[0][1]=3;
+            balance[1][1]=3;
             balance[1][0]=0;
         }
         if(simulatingBoard.getDisk(7, 0).getSign()==getSign()){
-            balance[0][6]=0;
-            balance[1][7]=0;
+            balance[0][6]=3;
+            balance[1][7]=3;
             balance[1][6]=0;
         }
         if(simulatingBoard.getDisk(0, 7).getSign()==getSign()){
-            balance[6][0]=0;
-            balance[7][1]=0;
+            balance[6][0]=3;
+            balance[7][1]=3;
             balance[6][1]=0;
         }
         if(simulatingBoard.getDisk(7, 7).getSign()==getSign()){
-            balance[6][7]=0;
-            balance[7][6]=0;
+            balance[6][7]=3;
+            balance[7][6]=3;
             balance[6][6]=0;
         }
         int botProfit = 0, playerProfit = 0;
