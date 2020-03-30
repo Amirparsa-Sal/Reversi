@@ -1,7 +1,10 @@
 package com.amirparsa.salmankhah;
 
 /**
- * Represents a Disk in game
+ * Represents a Disk with its sign and position.
+ *
+ * @author Amirparsa Salmankhah
+ * @version 1.0
  */
 public class Disk {
     //Sign of the disk
@@ -9,33 +12,66 @@ public class Disk {
     //Position of the disk
     private Point position;
 
-    public Disk(){
-        this('\0',0,0);
+    /**
+     * Constructor without any parameter. Makes a disk at origin with null sign.
+     */
+    public Disk() {
+        this('\0', 0, 0);
     }
 
-    public Disk(char sign, int x, int y){
+    /**
+     * Constrcutor with 3 parameters.
+     *
+     * @param sign Sign of the disk
+     * @param x    X of the disk
+     * @param y    Y of the disk
+     */
+    public Disk(char sign, int x, int y) {
         this.sign = sign;
-        position = new Point(x,y);
+        position = new Point(x, y);
     }
 
-    public void setSign(char sign){
+    /**
+     * Sign setter
+     *
+     * @param sign Sign of the disk
+     */
+    public void setSign(char sign) {
         this.sign = sign;
     }
 
-    public void setPosition(int x,int y){
+    /**
+     * Position setter
+     *
+     * @param x X of the disk
+     * @param y Y of the disk
+     */
+    public void setPosition(int x, int y) {
         position.setX(x);
         position.setY(y);
     }
 
-    public char getSign(){
+    /**
+     * Sign getter
+     * @return Sign of the disk
+     */
+    public char getSign() {
         return sign;
     }
 
-    public Point getPosition(){
+    /**
+     * Position getter
+     * @return Position of the disk
+     */
+    public Point getPosition() {
         return position;
     }
 
-    public void copy(Disk otherDisk){
+    /**
+     * Copy other disk fiels to this disk.
+     * @param otherDisk Other disk
+     */
+    public void copy(Disk otherDisk) {
         this.setSign(otherDisk.getSign());
         this.getPosition().copy(otherDisk.getPosition());
     }
