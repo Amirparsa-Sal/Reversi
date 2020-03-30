@@ -42,7 +42,7 @@ public class Point {
     /**
      * Y setter
      *
-     * @param x Y of point
+     * @param y Y of point
      */
     public void setY(int y) {
         this.y = y;
@@ -88,6 +88,7 @@ public class Point {
     /**
      * Checks that the other point is the points's neighbor.
      *
+     * @param secondPoint Other point
      * @return true if yes and false if not.
      */
     public boolean isNeighbor(Point secondPoint) {

@@ -197,7 +197,7 @@ abstract class Player {
     /**
      * Remove duplicate elements from the list.
      *
-     * @param points
+     * @param points list of points
      */
     protected void removeDuplicate(ArrayList<Point> points) {
         Iterator<Point> it = points.iterator();
