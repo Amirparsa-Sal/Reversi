@@ -167,6 +167,16 @@ abstract class Player {
     }
 
     /**
+     * Get opponent player
+     * @return Opponent player
+     */
+    public Player getOpponent() {
+        if (board.getPlayers()[0].equals(this))
+            return board.getPlayers()[1];
+        return board.getPlayers()[1];
+    }
+
+    /**
      * Get player's disks.
      *
      * @return An ArrayList of disks.
@@ -181,7 +191,7 @@ abstract class Player {
     }
 
     /**
-     * Get opponent;s disks.
+     * Get opponent's disks.
      *
      * @return An ArrayList of disks.
      */
@@ -225,6 +235,7 @@ abstract class Player {
 
     /**
      * Selects a point to move.
+     *
      * @param points An ArrayList of available points.
      * @return The selected point
      */
