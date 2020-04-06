@@ -17,8 +17,8 @@ public class Run {
         System.out.println("2) Multiplayer ");
         System.out.println("3) Bot vs Bot");
         Game game = null;
-        int input=0;
-        while(input<1 || input>3) {
+        int input = 0;
+        while (input < 1 || input > 3) {
             System.out.println("Enter the mode: ");
             input = sc.nextInt();
             if (input == 1)

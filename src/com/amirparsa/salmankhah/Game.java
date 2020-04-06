@@ -1,6 +1,7 @@
 package com.amirparsa.salmankhah;
 
-import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Represents a game with 2 players or bot and a board.
@@ -15,6 +16,7 @@ public class Game {
     private Player[] players;
     //Turn of the playing
     private int turn;
+
     /**
      * Constructor with 2 parameters.
      *
@@ -34,7 +36,7 @@ public class Game {
         else
             setRealPlayer(2);
         setBoard();
-        turn=0;
+        turn = 0;
     }
 
     /**
@@ -101,11 +103,13 @@ public class Game {
 
     /**
      * Turn getter
+     *
      * @return Turn of the playing
      */
-    public int getTurn(){
+    public int getTurn() {
         return turn;
     }
+
     /**
      * Checks if the game is still in progress or not.
      *

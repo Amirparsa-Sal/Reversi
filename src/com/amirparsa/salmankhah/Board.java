@@ -136,6 +136,7 @@ public class Board {
 
     /**
      * Copy the other board fields to this board.
+     *
      * @param otherBoard Other board
      */
     public void copy(Board otherBoard) {

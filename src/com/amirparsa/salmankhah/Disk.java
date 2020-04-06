@@ -53,6 +53,7 @@ public class Disk {
 
     /**
      * Sign getter
+     *
      * @return Sign of the disk
      */
     public char getSign() {
@@ -61,6 +62,7 @@ public class Disk {
 
     /**
      * Position getter
+     *
      * @return Position of the disk
      */
     public Point getPosition() {
@@ -69,6 +71,7 @@ public class Disk {
 
     /**
      * Copy other disk fiels to this disk.
+     *
      * @param otherDisk Other disk
      */
     public void copy(Disk otherDisk) {
