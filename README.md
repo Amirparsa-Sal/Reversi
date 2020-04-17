@@ -15,7 +15,7 @@ in order to start the game hust type name of the players.
 <img src=http://uupload.ir/files/0k8m_multiplayer.png width=400 height=300></img>
 #### Bot vs. Bot
 You can watch the bots game and enjoy :)
-##How to play
+## How to play
 You can place disks on the board by choosing the number of position you want.  
 <img src=http://uupload.ir/files/ecuw_game.png width=400 height=300></img>
 
